@@ -4,10 +4,10 @@
 #ifndef MESH_H
 #define MESH_H
 
-#include "settings/Settings.h"
-#include "utils/AABB3D.h"
-#include "utils/floatpoint.h"
-#include "utils/FMatrix4x3.h"
+#include "../include/settings/Settings.h"
+#include "../include/utils/AABB3D.h"
+#include "../include/utils/floatpoint.h"
+#include "../include/utils/FMatrix4x3.h"
 
 namespace cura
 {

@@ -4,7 +4,7 @@
 #ifndef UTILS_TYPES_ARITHMITIC_FACADE_H
 #define UTILS_TYPES_ARITHMITIC_FACADE_H
 
-#include "utils/types/generic.h"
+#include "../../include/utils/types/generic.h"
 
 namespace cura::utils
 {

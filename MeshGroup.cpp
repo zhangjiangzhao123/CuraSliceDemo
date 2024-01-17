@@ -1,7 +1,7 @@
 // Copyright (c) 2023 UltiMaker
 // CuraEngine is released under the terms of the AGPLv3 or higher
 
-#include "../MeshGroup.h"
+#include "../../include/MeshGroup.h"
 
 #include <limits>
 #include <stdio.h>
@@ -12,12 +12,12 @@
 //#include <scripta/logger.h>
 //#include <spdlog/spdlog.h>
 
-#include "../include/settings/types/Ratio.h" //For the shrinkage percentage and scale factor.
-#include "../include/utils/FMatrix4x3.h" //To transform the input meshes for shrinkage compensation and to align in command line mode.
-#include "../include/utils/floatpoint.h" //To accept incoming meshes with floating point vertices.
-#include "../include/utils/gettime.h"
-#include "../include/utils/section_type.h"
-#include "../include/utils/string.h"
+#include "../../include/settings/types/Ratio.h" //For the shrinkage percentage and scale factor.
+#include "../../include/utils/FMatrix4x3.h" //To transform the input meshes for shrinkage compensation and to align in command line mode.
+#include "../../include/utils/floatpoint.h" //To accept incoming meshes with floating point vertices.
+#include "../../include/utils/gettime.h"
+#include "../../include/utils/section_type.h"
+#include "../../include/utils/string.h"
 
 namespace cura
 {

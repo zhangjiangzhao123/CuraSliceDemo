@@ -8,7 +8,7 @@
 #include <ctype.h>
 #include <sstream> // ostringstream
 
-#include <spdlog/spdlog.h>
+//#include <spdlog/spdlog.h>
 
 namespace cura
 {

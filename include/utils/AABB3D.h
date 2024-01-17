@@ -5,7 +5,7 @@
 #define UTILS_AABB3D_H
 
 #include "IntPoint.h"
-#include "utils/AABB.h"
+#include "../../include/utils/AABB.h"
 
 namespace cura
 {

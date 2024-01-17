@@ -8,7 +8,6 @@
 #include <unordered_map>
 #include "utils/polygon.h"
 #include "settings/EnumSettings.h"
-#include "mesh.h"
 
 /*
     The Slicer creates layers of polygons from an optimized 3D model.

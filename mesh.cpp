@@ -3,8 +3,8 @@
 
 //#include <spdlog/spdlog.h>
 
-#include "../mesh.h"
-#include "../include/utils/floatpoint.h"
+#include "../../include/mesh.h"
+#include "../../include/utils/floatpoint.h"
 
 namespace cura
 {

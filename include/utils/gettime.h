@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 
-#include <spdlog/stopwatch.h>
+//#include <spdlog/stopwatch.h
 
 namespace cura
 {
@@ -25,7 +25,7 @@ public:
     using RegisteredTimes = std::vector<RegisteredTime>;
 
 private:
-    spdlog::stopwatch watch;
+    //spdlog::stopwatch watch;
     double start_time;
     RegisteredTimes registered_times;
 
