@@ -5,165 +5,167 @@
 #define UTILS_TYPES_ARITHMITIC_FACADE_H
 
 #include "../../include/utils/types/generic.h"
-
-namespace cura::utils
+#include "../../ThirdLibiary/include/concepts/concepts.hpp"
+namespace cura
 {
-
-template<floating_point T>
-struct NumericFacade
-{
-    using value_type = T;
-
-    value_type value{};
-
-    constexpr NumericFacade() noexcept = default;
-
-    constexpr NumericFacade(const NumericFacade& other) noexcept = default;
-    constexpr NumericFacade(NumericFacade&& other) noexcept = default;
-
-    constexpr NumericFacade(const floating_point auto val) noexcept
-        : value{ static_cast<value_type>(val) } {};
-    constexpr explicit NumericFacade(const integral auto val) noexcept
-        : value{ static_cast<value_type>(val) } {};
-
-    constexpr NumericFacade& operator=(const NumericFacade& other) noexcept = default;
-
-    constexpr NumericFacade& operator=(const floating_point auto& other) noexcept
+    namespace utils
     {
-        this->value = static_cast<value_type>(other);
-        return *this;
-    }
 
-    constexpr NumericFacade& operator=(NumericFacade&& other) noexcept = default;
+        template<floating_point T>
+        struct NumericFacade
+        {
+            using value_type = T;
 
-    constexpr NumericFacade& operator=(const floating_point auto&& other) noexcept
-    {
-        this->value = static_cast<value_type>(other);
-        return *this;
-    }
+            value_type value{};
 
-    ~NumericFacade() noexcept = default;
+            constexpr NumericFacade() noexcept = default;
 
-    constexpr operator value_type() const noexcept
-    {
-        return value;
-    }
+            constexpr NumericFacade(const NumericFacade& other) noexcept = default;
+            constexpr NumericFacade(NumericFacade&& other) noexcept = default;
 
-    constexpr bool operator==(const NumericFacade& other) const noexcept
-    {
-        return value == other.value;
-    }
+            constexpr NumericFacade(const floating_point auto val) noexcept
+                : value{ static_cast<value_type>(val) } {};
+            constexpr explicit NumericFacade(const integral auto val) noexcept
+                : value{ static_cast<value_type>(val) } {};
 
-    constexpr bool operator==(const floating_point auto& other) const noexcept
-    {
-        return value == static_cast<value_type>(other);
-    }
+            constexpr NumericFacade& operator=(const NumericFacade& other) noexcept = default;
 
-    constexpr auto operator<=>(const NumericFacade& other) const noexcept = default;
-    constexpr auto operator<=>(const floating_point auto& other) const noexcept
-    {
-        return value <=> static_cast<value_type>(other);
-    };
+            constexpr NumericFacade& operator=(const floating_point auto& other) noexcept
+            {
+                this->value = static_cast<value_type>(other);
+                return *this;
+            }
 
-    constexpr NumericFacade& operator+=(const NumericFacade& other) noexcept
-    {
-        value += other.value;
-        return *this;
-    }
+            constexpr NumericFacade& operator=(NumericFacade&& other) noexcept = default;
 
-    constexpr NumericFacade& operator+=(const floating_point auto& other) noexcept
-    {
-        value += static_cast<value_type>(other);
-        return *this;
-    }
+            constexpr NumericFacade& operator=(const floating_point auto&& other) noexcept
+            {
+                this->value = static_cast<value_type>(other);
+                return *this;
+            }
 
-    constexpr NumericFacade& operator-=(const NumericFacade& other) noexcept
-    {
-        value -= other.value;
-        return *this;
-    }
+            ~NumericFacade() noexcept = default;
 
-    constexpr NumericFacade& operator-=(const floating_point auto& other) noexcept
-    {
-        value -= static_cast<value_type>(other);
-        return *this;
-    }
+            constexpr operator value_type() const noexcept
+            {
+                return value;
+            }
 
-    constexpr NumericFacade& operator*=(const NumericFacade& other) noexcept
-    {
-        value *= other.value;
-        return *this;
-    }
+            constexpr bool operator==(const NumericFacade& other) const noexcept
+            {
+                return value == other.value;
+            }
 
-    constexpr NumericFacade& operator*=(const floating_point auto& other) noexcept
-    {
-        value *= static_cast<value_type>(other);
-        return *this;
-    }
+            constexpr bool operator==(const floating_point auto& other) const noexcept
+            {
+                return value == static_cast<value_type>(other);
+            }
 
-    constexpr NumericFacade& operator/=(const NumericFacade& other)
-    {
-        value /= other.value;
-        return *this;
-    }
+            constexpr auto operator<=>(const NumericFacade& other) const noexcept = default;
+            constexpr auto operator<=>(const floating_point auto& other) const noexcept
+            {
+                return value <=> static_cast<value_type>(other);
+            };
 
-    constexpr NumericFacade& operator/=(const floating_point auto& other)
-    {
-        value /= static_cast<value_type>(other);
-        return *this;
-    }
+            constexpr NumericFacade& operator+=(const NumericFacade& other) noexcept
+            {
+                value += other.value;
+                return *this;
+            }
 
-    constexpr NumericFacade operator+(const NumericFacade& other) const noexcept
-    {
-        return { value + other.value };
-    }
+            constexpr NumericFacade& operator+=(const floating_point auto& other) noexcept
+            {
+                value += static_cast<value_type>(other);
+                return *this;
+            }
 
-    constexpr NumericFacade operator+(NumericFacade&& other) const noexcept
-    {
-        return { value + other.value };
-    }
+            constexpr NumericFacade& operator-=(const NumericFacade& other) noexcept
+            {
+                value -= other.value;
+                return *this;
+            }
 
-    constexpr NumericFacade operator+(const floating_point auto& other) const noexcept
-    {
-        return { value + static_cast<value_type>(other) };
-    }
+            constexpr NumericFacade& operator-=(const floating_point auto& other) noexcept
+            {
+                value -= static_cast<value_type>(other);
+                return *this;
+            }
 
-    constexpr NumericFacade operator-(const NumericFacade& other) const noexcept
-    {
-        return { value - other.value };
-    }
+            constexpr NumericFacade& operator*=(const NumericFacade& other) noexcept
+            {
+                value *= other.value;
+                return *this;
+            }
 
-    constexpr NumericFacade operator-(const floating_point auto& other) const noexcept
-    {
-        return { value - static_cast<value_type>(other) };
-    }
+            constexpr NumericFacade& operator*=(const floating_point auto& other) noexcept
+            {
+                value *= static_cast<value_type>(other);
+                return *this;
+            }
 
-    constexpr NumericFacade operator*(const NumericFacade& other) const noexcept
-    {
-        return { value * other.value };
-    }
+            constexpr NumericFacade& operator/=(const NumericFacade& other)
+            {
+                value /= other.value;
+                return *this;
+            }
 
-    constexpr NumericFacade operator*(const floating_point auto& other) const noexcept
-    {
-        return { value * static_cast<value_type>(other) };
-    }
+            constexpr NumericFacade& operator/=(const floating_point auto& other)
+            {
+                value /= static_cast<value_type>(other);
+                return *this;
+            }
 
-    constexpr NumericFacade operator/(const NumericFacade& other) const
-    {
-        return { value / other.value };
-    }
+            constexpr NumericFacade operator+(const NumericFacade& other) const noexcept
+            {
+                return { value + other.value };
+            }
 
-    constexpr NumericFacade operator/(const floating_point auto& other) const
-    {
-        return { value / static_cast<value_type>(other) };
-    }
+            constexpr NumericFacade operator+(NumericFacade&& other) const noexcept
+            {
+                return { value + other.value };
+            }
 
-    constexpr NumericFacade operator-() const noexcept
-    {
-        return { -value };
-    }
-};
+            constexpr NumericFacade operator+(const floating_point auto& other) const noexcept
+            {
+                return { value + static_cast<value_type>(other) };
+            }
 
-} // namespace cura::utils
+            constexpr NumericFacade operator-(const NumericFacade& other) const noexcept
+            {
+                return { value - other.value };
+            }
 
+            constexpr NumericFacade operator-(const floating_point auto& other) const noexcept
+            {
+                return { value - static_cast<value_type>(other) };
+            }
+
+            constexpr NumericFacade operator*(const NumericFacade& other) const noexcept
+            {
+                return { value * other.value };
+            }
+
+            constexpr NumericFacade operator*(const floating_point auto& other) const noexcept
+            {
+                return { value * static_cast<value_type>(other) };
+            }
+
+            constexpr NumericFacade operator/(const NumericFacade& other) const
+            {
+                return { value / other.value };
+            }
+
+            constexpr NumericFacade operator/(const floating_point auto& other) const
+            {
+                return { value / static_cast<value_type>(other) };
+            }
+
+            constexpr NumericFacade operator-() const noexcept
+            {
+                return { -value };
+            }
+        };
+
+    } // namespace cura::utils
+}
 #endif // UTILS_TYPES_ARITHMITIC_FACADE_H

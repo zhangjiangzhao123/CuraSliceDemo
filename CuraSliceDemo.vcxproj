@@ -18,6 +18,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="clipper.hpp" />
+    <ClInclude Include="include\Application.h" />
     <ClInclude Include="include\mesh.h" />
     <ClInclude Include="include\MeshGroup.h" />
     <ClInclude Include="include\sliceDataStorage.h" />
@@ -34,10 +35,13 @@
     <ClInclude Include="include\utils\NoCopy.h" />
     <ClInclude Include="include\utils\Point3.h" />
     <ClInclude Include="include\utils\polygon.h" />
+    <ClInclude Include="include\utils\Simplify.h" />
+    <ClInclude Include="include\utils\ThreadPool.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="clipper.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\mesh.cpp" />
     <ClCompile Include="src\MeshGroup.cpp" />
     <ClCompile Include="src\settings\Settings.cpp" />
@@ -51,6 +55,8 @@
     <ClCompile Include="src\utils\ListPolyIt.cpp" />
     <ClCompile Include="src\utils\Point3.cpp" />
     <ClCompile Include="src\utils\polygon.cpp" />
+    <ClCompile Include="src\utils\Simplify.cpp" />
+    <ClCompile Include="src\utils\ThreadPool.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E0DAC50E-8A6C-4211-9078-477D4C57FD74}</ProjectGuid>
@@ -102,9 +108,12 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
   </PropertyGroup>
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgEnabled>false</VcpkgEnabled>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdLibiary\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <OpenMPSupport>true</OpenMPSupport>
@@ -119,6 +128,7 @@
     <ClCompile>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <OpenMPSupport>true</OpenMPSupport>
+      <AdditionalIncludeDirectories>$(SolutionDir)ThirdLibiary\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'" Label="Configuration">

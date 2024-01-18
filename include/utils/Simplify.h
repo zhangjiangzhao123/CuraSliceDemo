@@ -5,7 +5,7 @@
 #define UTILS_SIMPLIFY_H
 
 #include "polygon.h"
-#include "ExtrusionLine.h"
+//#include "ExtrusionLine.h"
 #include "linearAlg2D.h" //To calculate line deviations and intersecting lines.
 #include "../settings/Settings.h" //To load the parameters from a Settings object.
 
@@ -58,7 +58,7 @@ public:
      * \param settings A settings object to obtain the simplification parameters
      * from.
      */
-    Simplify(const Settings& settings);
+    //Simplify(const Settings& settings);
 
     /*!
      * Simplify a batch of polygons.
@@ -79,7 +79,7 @@ public:
      * \param polygon The polygon to simplify.
      * \return The simplified polygon.
      */
-    ExtrusionLine polygon(const ExtrusionLine& polygon) const;
+    //ExtrusionLine polygon(const ExtrusionLine& polygon) const;
 
     /*!
      * Simplify a batch of polylines.
@@ -106,7 +106,7 @@ public:
      * \param polyline The polyline to simplify.
      * \return The simplified polyline.
      */
-    ExtrusionLine polyline(const ExtrusionLine& polyline) const;
+    //ExtrusionLine polyline(const ExtrusionLine& polyline) const;
 
     /*!
      * Line segments shorter than this size should be considered for removal.
@@ -361,7 +361,7 @@ protected:
         if(intersection_deviation <= max_deviation * max_deviation) //Intersection point doesn't deviate too much. Use it!
         {
             to_delete[vertex] = true;
-            polygon[length2_before <= length2_after ? before : after] = createIntersection(polygon[before], intersection, polygon[after]);
+            //polygon[length2_before <= length2_after ? before : after] = createIntersection(polygon[before], intersection, polygon[after]);
             return true;
         }
         return false;
@@ -407,7 +407,7 @@ protected:
      * \param original The extrusion line to copy the properties from.
      * \return An empty extrusion line.
      */
-    ExtrusionLine createEmpty(const ExtrusionLine& original) const;
+    //ExtrusionLine createEmpty(const ExtrusionLine& original) const;
 
     /*!
      * Append a vertex to this polygon.
@@ -425,7 +425,7 @@ protected:
      * \param extrusion_line The extrusion line to add to.
      * \param vertex The vertex to add.
      */
-    void appendVertex(ExtrusionLine& extrusion_line, const ExtrusionJunction& vertex) const;
+    //void appendVertex(ExtrusionLine& extrusion_line, const ExtrusionJunction& vertex) const;
 
     /*!
      * Get the coordinates of a vertex.
@@ -444,7 +444,7 @@ protected:
      * \param vertex A vertex to get the coordinates of.
      * \return The coordinates of that vertex.
      */
-    const Point& getPosition(const ExtrusionJunction& vertex) const;
+    //const Point& getPosition(const ExtrusionJunction& vertex) const;
 
     /*!
      * Create an intersection vertex that can be placed in a polygon.
@@ -464,7 +464,7 @@ protected:
      * \param after One of the vertices of the edge that gets replaced by an
      * intersection vertex.
      */
-    ExtrusionJunction createIntersection(const ExtrusionJunction& before, const Point intersection, const ExtrusionJunction& after) const;
+    //ExtrusionJunction createIntersection(const ExtrusionJunction& before, const Point intersection, const ExtrusionJunction& after) const;
 
     /*!
      * Get the extrusion area deviation that would be caused by removing this
@@ -487,7 +487,7 @@ protected:
      * \param after The vertex after the one that is to be removed.
      * \return The area deviation that would be caused by removing the vertex.
      */
-    coord_t getAreaDeviation(const ExtrusionJunction& before, const ExtrusionJunction& vertex, const ExtrusionJunction& after) const;
+    //coord_t getAreaDeviation(const ExtrusionJunction& before, const ExtrusionJunction& vertex, const ExtrusionJunction& after) const;
 };
 
 } //namespace cura

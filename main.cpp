@@ -69,8 +69,7 @@ bool writeCLIFileBinary(QString filePath, std::vector<SlicerLayer>&layers, float
 	unsigned int id = 0, dir = 0, pNum = 0;
 	float layerZ = -1;
 
-	for (int i = 0; i < layers.size(); i++)
-	{
+	for (int i = 0; i < layers.size(); i++) {
 		const SlicerLayer& layer = layers[i];
 		layerZ = INT2MM(layer.z) / unit;
 		cliFile.write(reinterpret_cast<char*>(&layerLong), 2);
@@ -79,12 +78,8 @@ bool writeCLIFileBinary(QString filePath, std::vector<SlicerLayer>&layers, float
 		const ClipperLib::Paths& paths = layer.polygons.paths;
 		for (int j = 0; j < paths.size(); j++) {
 			ClipperLib::Path path = paths[j];
-			if (Orientation(path)) {
-				dir = 1;
-			}
-			else {
-				dir = 0;
-			}
+
+			dir = Orientation(path) == true ? 1 : 0;
 			pNum = path.size();
 
 			cliFile.write(reinterpret_cast<char*>(&polygonLong), 2);

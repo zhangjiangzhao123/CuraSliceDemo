@@ -83,6 +83,15 @@
     <ClInclude Include="clipper.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\utils\Simplify.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\utils\ThreadPool.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Application.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\utils\AABB.cpp">
@@ -129,6 +138,15 @@
     </ClCompile>
     <ClCompile Include="src\settings\Settings.cpp">
       <Filter>Source Files\settings</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\Simplify.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\ThreadPool.cpp">
+      <Filter>Source Files\utils</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
