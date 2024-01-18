@@ -30,6 +30,12 @@
     <Filter Include="Source Files\settings">
       <UniqueIdentifier>{7abcd6ac-074c-4fd2-a125-cdb954dd3dec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\settings">
+      <UniqueIdentifier>{f89ba2df-37cd-4100-bf75-1f551566fc44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\settings\types">
+      <UniqueIdentifier>{5c0e19a2-6233-4237-bdb7-b6d11b156a71}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\utils\AABB.h">
@@ -91,6 +97,24 @@
     </ClInclude>
     <ClInclude Include="include\Application.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\settings\types\Angle.h">
+      <Filter>Header Files\settings\types</Filter>
+    </ClInclude>
+    <ClInclude Include="include\settings\types\Duration.h">
+      <Filter>Header Files\settings\types</Filter>
+    </ClInclude>
+    <ClInclude Include="include\settings\types\LayerIndex.h">
+      <Filter>Header Files\settings\types</Filter>
+    </ClInclude>
+    <ClInclude Include="include\settings\types\Ratio.h">
+      <Filter>Header Files\settings\types</Filter>
+    </ClInclude>
+    <ClInclude Include="include\settings\types\Temperature.h">
+      <Filter>Header Files\settings\types</Filter>
+    </ClInclude>
+    <ClInclude Include="include\settings\types\Velocity.h">
+      <Filter>Header Files\settings\types</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

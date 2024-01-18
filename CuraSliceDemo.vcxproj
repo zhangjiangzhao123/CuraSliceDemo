@@ -21,6 +21,12 @@
     <ClInclude Include="include\Application.h" />
     <ClInclude Include="include\mesh.h" />
     <ClInclude Include="include\MeshGroup.h" />
+    <ClInclude Include="include\settings\types\Angle.h" />
+    <ClInclude Include="include\settings\types\Duration.h" />
+    <ClInclude Include="include\settings\types\LayerIndex.h" />
+    <ClInclude Include="include\settings\types\Ratio.h" />
+    <ClInclude Include="include\settings\types\Temperature.h" />
+    <ClInclude Include="include\settings\types\Velocity.h" />
     <ClInclude Include="include\sliceDataStorage.h" />
     <ClInclude Include="include\slicer.h" />
     <ClInclude Include="include\utils\AABB.h" />

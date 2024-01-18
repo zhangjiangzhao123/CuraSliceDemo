@@ -1,7 +1,7 @@
 // Copyright (c) 2023 UltiMaker
 // CuraEngine is released under the terms of the AGPLv3 or higher
 
-#include "../MeshGroup.h"
+#include "../include/MeshGroup.h"
 
 #include <limits>
 #include <stdio.h>

@@ -4,7 +4,7 @@
 #ifndef VELOCITY_H
 #define VELOCITY_H
 
-#include "../../include/utils/types/numeric_facade.h"
+#include "utils/types/numeric_facade.h"
 
 namespace cura
 {
