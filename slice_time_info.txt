@@ -1,0 +1,147 @@
+Start Slicing D:\Merge_of_shell_01_of_20240113_shell_64_of_20240113.stl
+Read STL time : 165.497377s
+Slice Thickness:1.000000 mm
+Start Slicing D:\Manifold_demo.stl
+Read STL time : 0.500368s
+Slice Thickness:1.000000 mm
+Slice time : 0.140424s
+Write time : 0.054388s
+All time : 0.695453s
+
+
+Start Slicing D:\Merge_of_shell_01_of_20240113_shell_64_of_20240113.stl
+Read STL time : 19.713863s
+Slice Thickness:1.000000 mm
+Slice time : 3.883644s
+Write time : 0.320835s
+All time : 23.920340s
+
+
+Start Slicing D:\Merge_of_shell_01_of_20240113_shell_64_of_20240113.stl
+Read STL time : 19.359883s
+Slice Thickness:0.060000 mm
+Slice time : 285.055618s
+Write time : 17.697954s
+All time : 322.114840s
+
+
+Start Slicing D:\Merge_of_shell_01_of_20240113_shell_64_of_20240113.stl
+Read STL time : 26.315835s
+Slice Thickness:1.000000 mm
+Slice time : 11.768145s
+Write time : 0.787048s
+All time : 38.872560s
+
+
+Start Slicing D:\Merge_of_shell_01_of_20240113_shell_64_of_20240113.stl
+Read STL time : 29.727613s
+Slice Thickness:0.150000 mm
+Slice time : 101.171924s
+Write time : 6.389841s
+All time : 137.289916s
+
+
+Start Slicing D:\Merge_of_shell_01_of_20240113_shell_64_of_20240113.stl
+Read STL time : 19.274212s
+Slice Thickness:0.150000 mm
+Slice time : 28.094530s
+Write time : 1.789003s
+All time : 49.158866s
+
+
+Start Slicing D:\Merge_of_shell_01_of_20240113_shell_64_of_20240113.stl
+Read STL time : 32.198892s
+Slice Thickness:0.150000 mm
+Slice time : 50.669779s
+Write time : 5.666890s
+All time : 88.536936s
+
+
+Start Slicing D:\Merge_of_shell_01_of_20240113_shell_64_of_20240113.stl
+Read STL time : 19.281764s
+Slice Thickness:0.150000 mm
+Slice time : 27.365533s
+Write time : 1.833679s
+All time : 48.482097s
+
+
+Start Slicing D:\Merge_of_shell_01_of_20240113_shell_64_of_20240113.stl
+Read STL time : 28.917182s
+Slice Thickness:0.150000 mm
+Slice time : 79.801129s
+Write time : 4.872292s
+All time : 113.591520s
+
+
+Start Slicing D:\Merge_of_shell_01_of_20240113_shell_64_of_20240113.stl
+Read STL time : 33.393426s
+Slice Thickness:0.150000 mm
+Slice time : 58.422141s
+Write time : 5.043932s
+All time : 96.860967s
+
+
+Start Slicing D:\Merge_of_shell_01_of_20240113_shell_64_of_20240113.stl
+Read STL time : 37.464197s
+Slice Thickness:0.150000 mm
+Slice time : 87.222701s
+Write time : 5.128794s
+All time : 129.817069s
+
+
+Start Slicing D:\Merge_of_shell_01_of_20240113_shell_64_of_20240113.stl
+Read STL time : 20.099017s
+Slice Thickness:0.150000 mm
+Slice time : 27.750423s
+Write time : 1.745911s
+All time : 49.596589s
+
+
+Start Slicing D:\Merge_of_shell_01_of_20240113_shell_64_of_20240113.stl
+Read STL time : 28.105654s
+Slice Thickness:0.150000 mm
+Slice time : 80.449212s
+Write time : 3.417117s
+All time : 111.973749s
+
+
+Start Slicing D:\Merge_of_shell_01_of_20240113_shell_64_of_20240113.stl
+Read STL time : 20.171442s
+Slice Thickness:0.150000 mm
+Slice time : 29.029578s
+Write time : 0.970115s
+All time : 50.172344s
+
+
+Start Slicing D:\Merge_of_shell_01_of_20240113_shell_64_of_20240113.stl
+Read STL time : 39.042168s
+Slice Thickness:0.150000 mm
+Slice time : 82.930938s
+Write time : 1.829014s
+All time : 123.803772s
+
+
+Start Slicing D:\Merge_of_shell_01_of_20240113_shell_64_of_20240113.stl
+Read STL time : 20.625825s
+Slice Thickness:0.150000 mm
+Slice time : 34.101275s
+Write time : 0.688140s
+All time : 55.415676s
+
+
+Start Slicing D:\Merge_of_shell_01_of_20240113_shell_64_of_20240113.stl
+Read STL time : 19.713681s
+Slice Thickness:1.000000 mm
+Slice time : 12.930488s
+Write time : 0.091525s
+All time : 32.736907s
+
+
+Start Slicing D:\Merge_of_shell_01_of_20240113_shell_64_of_20240113.stl
+Read STL time : 30.645593s
+Slice Thickness:1.000000 mm
+Slice time : 13.368098s
+Write time : 0.083346s
+All time : 44.098585s
+
+

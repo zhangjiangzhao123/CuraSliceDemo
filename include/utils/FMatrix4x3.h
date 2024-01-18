@@ -4,7 +4,7 @@
 #ifndef FMATRIX4X3_H
 #define FMATRIX4X3_H
 
-#include "../../include/settings/types/Ratio.h"
+//#include "../../include/settings/types/Ratio.h"
 
 namespace cura
 {
@@ -28,8 +28,8 @@ public:
      * is reduced, all coordinates will go towards this origin. If the scale is
      * increased, all coordinates will go away from this origin.
      */
-    static FMatrix4x3 scale(const Ratio scale, const Point3 origin);
-    static FMatrix4x3 scale(const Ratio scale_x, const Ratio scale_y, const Ratio scale_z, const Point3 origin);
+    //static FMatrix4x3 scale(const Ratio scale, const Point3 origin);
+    //static FMatrix4x3 scale(const Ratio scale_x, const Ratio scale_y, const Ratio scale_z, const Point3 origin);
 
     /*!
      * The matrix data, row-endian.

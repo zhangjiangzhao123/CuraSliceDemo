@@ -121,7 +121,7 @@ int main()
 	
 	Mesh* mesh = &meshGroup->meshes.front();
 	AABB3D bbox = mesh->getAABB();
-	float thickness = 150;
+	float thickness = 1000;
 	int sliceLayerCount = bbox.max.z / thickness;
 	std::cout << "Slice Thickness :" << thickness / 1000 << " mm\n";
 	fprintf(fp, "Slice Thickness:%f mm\n", thickness / 1000);

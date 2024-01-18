@@ -47,13 +47,13 @@ class ThreadPool
      * \param func Closure that unlocks the local worker's lock passed as an argument while
      * doing asynchronous work.
      */
-    template<typename F>
-    void push(const lock_t& lock [[maybe_unused]], F&& func)
-    {
-        assert(lock);
-        tasks.push_back(std::forward<F>(func));
-        condition.notify_one();
-    }
+    //template<typename F>
+    //void push(const lock_t& lock [[maybe_unused]], F&& func)
+    //{
+    //    assert(lock);
+    //    tasks.push_back(std::forward<F>(func));
+    //    condition.notify_one();
+    //}
     /*!
      * \brief Executes pending tasks while the predicates returns true
      * This method doesn't wait unless predicate does (like implementation of ThreadPool::worker())
@@ -235,7 +235,7 @@ void run_multiple_producers_ordered_consumer(ptrdiff_t first, ptrdiff_t last, P&
 template<typename Producer, typename Consumer>
 class MultipleProducersOrderedConsumer
 {
-    using item_t = std::invoke_result_t<Producer, ptrdiff_t>;
+    //using item_t = std::invoke_result_t<Producer, ptrdiff_t>;
     using lock_t = ThreadPool::lock_t;
 
   public:
@@ -367,7 +367,7 @@ class MultipleProducersOrderedConsumer
     Producer producer;
     Consumer consumer;
     const ptrdiff_t max_pending; // Number of produced items that can wait in the queue
-    const std::unique_ptr<item_t[]> queue; // Ring buffer mapping each intermediary result to a slot
+    //const std::unique_ptr<item_t[]> queue; // Ring buffer mapping each intermediary result to a slot
     const ptrdiff_t last_idx;
 
     ptrdiff_t write_idx; // Next slot to produce
@@ -377,8 +377,8 @@ class MultipleProducersOrderedConsumer
 };
 
 //! \private Template deduction guide: defaults to inlining closures into the class layout
-template<typename P, typename C>
-MultipleProducersOrderedConsumer(ptrdiff_t, ptrdiff_t, P , C, size_t) -> MultipleProducersOrderedConsumer<P, C>;
+//template<typename P, typename C>
+//MultipleProducersOrderedConsumer(ptrdiff_t, ptrdiff_t, P , C, size_t) -> MultipleProducersOrderedConsumer<P, C>;
 
 } //Cura namespace.
 #endif // THREADPOOL_H
