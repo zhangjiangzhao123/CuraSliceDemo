@@ -27,7 +27,6 @@
     <ClInclude Include="include\settings\types\Ratio.h" />
     <ClInclude Include="include\settings\types\Temperature.h" />
     <ClInclude Include="include\settings\types\Velocity.h" />
-    <ClInclude Include="include\sliceDataStorage.h" />
     <ClInclude Include="include\slicer.h" />
     <ClInclude Include="include\utils\AABB.h" />
     <ClInclude Include="include\utils\AABB3D.h" />
@@ -42,6 +41,10 @@
     <ClInclude Include="include\utils\Point3.h" />
     <ClInclude Include="include\utils\polygon.h" />
     <ClInclude Include="include\utils\Simplify.h" />
+    <ClInclude Include="include\utils\SparseGrid.h" />
+    <ClInclude Include="include\utils\SparseLineGrid.h" />
+    <ClInclude Include="include\utils\SparsePointGrid.h" />
+    <ClInclude Include="include\utils\SparsePointGridInclusive.h" />
     <ClInclude Include="include\utils\ThreadPool.h" />
   </ItemGroup>
   <ItemGroup>
@@ -50,8 +53,6 @@
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\mesh.cpp" />
     <ClCompile Include="src\MeshGroup.cpp" />
-    <ClCompile Include="src\settings\Settings.cpp" />
-    <ClCompile Include="src\sliceDataStorage.cpp" />
     <ClCompile Include="src\slicer.cpp" />
     <ClCompile Include="src\utils\AABB.cpp" />
     <ClCompile Include="src\utils\AABB3D.cpp" />
@@ -62,6 +63,7 @@
     <ClCompile Include="src\utils\Point3.cpp" />
     <ClCompile Include="src\utils\polygon.cpp" />
     <ClCompile Include="src\utils\Simplify.cpp" />
+    <ClCompile Include="src\utils\SquareGrid.cpp" />
     <ClCompile Include="src\utils\ThreadPool.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

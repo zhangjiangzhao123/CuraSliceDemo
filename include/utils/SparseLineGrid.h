@@ -12,7 +12,7 @@
 
 #include "IntPoint.h"
 #include "SparseGrid.h"
-#include "SVG.h" // debug
+//#include "SVG.h" // debug
 
 namespace cura {
 

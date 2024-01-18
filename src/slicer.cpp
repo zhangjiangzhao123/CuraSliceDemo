@@ -17,7 +17,7 @@
 #include "../include/settings/EnumSettings.h"
 //#include "../../include/settings/types/LayerIndex.h"
 #include "../../include/utils/Simplify.h"
-//#include "../../include/utils/SparsePointGridInclusive.h"
+#include "../../include/utils/SparsePointGridInclusive.h"
 #include "../../include/utils/ThreadPool.h"
 //#include "../../include/utils/gettime.h"
 //#include "../../include/utils/section_type.h"
@@ -40,6 +40,8 @@ void SlicerLayer::makeBasicPolygonLoops(Polygons& open_polylines)
     }
     // Clear the segmentList to save memory, it is no longer needed after this point.
     segments.clear();
+    //segments.shrink_to_fit();
+    std::vector<SlicerSegment>().swap(segments);
 }
 
 void SlicerLayer::makeBasicPolygonLoop(Polygons& open_polylines, const size_t start_segment_idx)
@@ -192,144 +194,144 @@ std::priority_queue<SlicerLayer::PossibleStitch> SlicerLayer::findPossibleStitch
 {
     std::priority_queue<PossibleStitch> stitch_queue;
 
-    //// maximum distance squared
-    //int64_t max_dist2 = max_dist * max_dist;
+    // maximum distance squared
+    int64_t max_dist2 = max_dist * max_dist;
 
-    //// Represents a terminal point of a polyline in open_polylines.
-    //struct StitchGridVal
-    //{
-    //    unsigned int polyline_idx;
-    //    // Depending on the SparsePointGridInclusive, either the start point or the
-    //    // end point of the polyline
-    //    Point polyline_term_pt;
-    //};
+    // Represents a terminal point of a polyline in open_polylines.
+    struct StitchGridVal
+    {
+        unsigned int polyline_idx;
+        // Depending on the SparsePointGridInclusive, either the start point or the
+        // end point of the polyline
+        Point polyline_term_pt;
+    };
 
-    //struct StitchGridValLocator
-    //{
-    //    Point operator()(const StitchGridVal& val) const
-    //    {
-    //        return val.polyline_term_pt;
-    //    }
-    //};
+    struct StitchGridValLocator
+    {
+        Point operator()(const StitchGridVal& val) const
+        {
+            return val.polyline_term_pt;
+        }
+    };
 
-    //// Used to find nearby end points within a fixed maximum radius
-    //SparsePointGrid<StitchGridVal, StitchGridValLocator> grid_ends(cell_size);
-    //// Used to find nearby start points within a fixed maximum radius
-    //SparsePointGrid<StitchGridVal, StitchGridValLocator> grid_starts(cell_size);
+    // Used to find nearby end points within a fixed maximum radius
+    SparsePointGrid<StitchGridVal, StitchGridValLocator> grid_ends(cell_size);
+    // Used to find nearby start points within a fixed maximum radius
+    SparsePointGrid<StitchGridVal, StitchGridValLocator> grid_starts(cell_size);
 
-    //// populate grids
+    // populate grids
 
-    //// Inserts the ends of all polylines into the grid (does not
-    ////   insert the starts of the polylines).
-    //for (unsigned int polyline_0_idx = 0; polyline_0_idx < open_polylines.size(); polyline_0_idx++)
-    //{
-    //    ConstPolygonRef polyline_0 = open_polylines[polyline_0_idx];
+    // Inserts the ends of all polylines into the grid (does not
+    //   insert the starts of the polylines).
+    for (unsigned int polyline_0_idx = 0; polyline_0_idx < open_polylines.size(); polyline_0_idx++)
+    {
+        ConstPolygonRef polyline_0 = open_polylines[polyline_0_idx];
 
-    //    if (polyline_0.size() < 1)
-    //        continue;
+        if (polyline_0.size() < 1)
+            continue;
 
-    //    StitchGridVal grid_val;
-    //    grid_val.polyline_idx = polyline_0_idx;
-    //    grid_val.polyline_term_pt = polyline_0.back();
-    //    grid_ends.insert(grid_val);
-    //}
+        StitchGridVal grid_val;
+        grid_val.polyline_idx = polyline_0_idx;
+        grid_val.polyline_term_pt = polyline_0.back();
+        grid_ends.insert(grid_val);
+    }
 
-    //// Inserts the start of all polylines into the grid.
-    //if (allow_reverse)
-    //{
-    //    for (unsigned int polyline_0_idx = 0; polyline_0_idx < open_polylines.size(); polyline_0_idx++)
-    //    {
-    //        ConstPolygonRef polyline_0 = open_polylines[polyline_0_idx];
+    // Inserts the start of all polylines into the grid.
+    if (allow_reverse)
+    {
+        for (unsigned int polyline_0_idx = 0; polyline_0_idx < open_polylines.size(); polyline_0_idx++)
+        {
+            ConstPolygonRef polyline_0 = open_polylines[polyline_0_idx];
 
-    //        if (polyline_0.size() < 1)
-    //            continue;
+            if (polyline_0.size() < 1)
+                continue;
 
-    //        StitchGridVal grid_val;
-    //        grid_val.polyline_idx = polyline_0_idx;
-    //        grid_val.polyline_term_pt = polyline_0[0];
-    //        grid_starts.insert(grid_val);
-    //    }
-    //}
+            StitchGridVal grid_val;
+            grid_val.polyline_idx = polyline_0_idx;
+            grid_val.polyline_term_pt = polyline_0[0];
+            grid_starts.insert(grid_val);
+        }
+    }
 
-    //// search for nearby end points
-    //for (unsigned int polyline_1_idx = 0; polyline_1_idx < open_polylines.size(); polyline_1_idx++)
-    //{
-    //    ConstPolygonRef polyline_1 = open_polylines[polyline_1_idx];
+    // search for nearby end points
+    for (unsigned int polyline_1_idx = 0; polyline_1_idx < open_polylines.size(); polyline_1_idx++)
+    {
+        ConstPolygonRef polyline_1 = open_polylines[polyline_1_idx];
 
-    //    if (polyline_1.size() < 1)
-    //        continue;
+        if (polyline_1.size() < 1)
+            continue;
 
-    //    std::vector<StitchGridVal> nearby_ends;
+        std::vector<StitchGridVal> nearby_ends;
 
-    //    // Check for stitches that append polyline_1 onto polyline_0
-    //    // in natural order.  These are stitches that use the end of
-    //    // polyline_0 and the start of polyline_1.
-    //    nearby_ends = grid_ends.getNearby(polyline_1[0], max_dist);
-    //    for (const auto& nearby_end : nearby_ends)
-    //    {
-    //        Point diff = nearby_end.polyline_term_pt - polyline_1[0];
-    //        int64_t dist2 = vSize2(diff);
-    //        if (dist2 < max_dist2)
-    //        {
-    //            PossibleStitch poss_stitch;
-    //            poss_stitch.dist2 = dist2;
-    //            poss_stitch.terminus_0 = Terminus{ nearby_end.polyline_idx, true };
-    //            poss_stitch.terminus_1 = Terminus{ polyline_1_idx, false };
-    //            stitch_queue.push(poss_stitch);
-    //        }
-    //    }
+        // Check for stitches that append polyline_1 onto polyline_0
+        // in natural order.  These are stitches that use the end of
+        // polyline_0 and the start of polyline_1.
+        nearby_ends = grid_ends.getNearby(polyline_1[0], max_dist);
+        for (const auto& nearby_end : nearby_ends)
+        {
+            Point diff = nearby_end.polyline_term_pt - polyline_1[0];
+            int64_t dist2 = vSize2(diff);
+            if (dist2 < max_dist2)
+            {
+                PossibleStitch poss_stitch;
+                poss_stitch.dist2 = dist2;
+                poss_stitch.terminus_0 = Terminus{ nearby_end.polyline_idx, true };
+                poss_stitch.terminus_1 = Terminus{ polyline_1_idx, false };
+                stitch_queue.push(poss_stitch);
+            }
+        }
 
-    //    if (allow_reverse)
-    //    {
-    //        // Check for stitches that append polyline_1 onto polyline_0
-    //        // by reversing order of polyline_1.  These are stitches that
-    //        // use the end of polyline_0 and the end of polyline_1.
-    //        nearby_ends = grid_ends.getNearby(polyline_1.back(), max_dist);
-    //        for (const auto& nearby_end : nearby_ends)
-    //        {
-    //            // Disallow stitching with self with same end point
-    //            if (nearby_end.polyline_idx == polyline_1_idx)
-    //            {
-    //                continue;
-    //            }
+        if (allow_reverse)
+        {
+            // Check for stitches that append polyline_1 onto polyline_0
+            // by reversing order of polyline_1.  These are stitches that
+            // use the end of polyline_0 and the end of polyline_1.
+            nearby_ends = grid_ends.getNearby(polyline_1.back(), max_dist);
+            for (const auto& nearby_end : nearby_ends)
+            {
+                // Disallow stitching with self with same end point
+                if (nearby_end.polyline_idx == polyline_1_idx)
+                {
+                    continue;
+                }
 
-    //            Point diff = nearby_end.polyline_term_pt - polyline_1.back();
-    //            int64_t dist2 = vSize2(diff);
-    //            if (dist2 < max_dist2)
-    //            {
-    //                PossibleStitch poss_stitch;
-    //                poss_stitch.dist2 = dist2;
-    //                poss_stitch.terminus_0 = Terminus{ nearby_end.polyline_idx, true };
-    //                poss_stitch.terminus_1 = Terminus{ polyline_1_idx, true };
-    //                stitch_queue.push(poss_stitch);
-    //            }
-    //        }
+                Point diff = nearby_end.polyline_term_pt - polyline_1.back();
+                int64_t dist2 = vSize2(diff);
+                if (dist2 < max_dist2)
+                {
+                    PossibleStitch poss_stitch;
+                    poss_stitch.dist2 = dist2;
+                    poss_stitch.terminus_0 = Terminus{ nearby_end.polyline_idx, true };
+                    poss_stitch.terminus_1 = Terminus{ polyline_1_idx, true };
+                    stitch_queue.push(poss_stitch);
+                }
+            }
 
-    //        // Check for stitches that append polyline_1 onto polyline_0
-    //        // by reversing order of polyline_0.  These are stitches that
-    //        // use the start of polyline_0 and the start of polyline_1.
-    //        std::vector<StitchGridVal> nearby_starts = grid_starts.getNearby(polyline_1[0], max_dist);
-    //        for (const auto& nearby_start : nearby_starts)
-    //        {
-    //            // Disallow stitching with self with same end point
-    //            if (nearby_start.polyline_idx == polyline_1_idx)
-    //            {
-    //                continue;
-    //            }
+            // Check for stitches that append polyline_1 onto polyline_0
+            // by reversing order of polyline_0.  These are stitches that
+            // use the start of polyline_0 and the start of polyline_1.
+            std::vector<StitchGridVal> nearby_starts = grid_starts.getNearby(polyline_1[0], max_dist);
+            for (const auto& nearby_start : nearby_starts)
+            {
+                // Disallow stitching with self with same end point
+                if (nearby_start.polyline_idx == polyline_1_idx)
+                {
+                    continue;
+                }
 
-    //            Point diff = nearby_start.polyline_term_pt - polyline_1[0];
-    //            int64_t dist2 = vSize2(diff);
-    //            if (dist2 < max_dist2)
-    //            {
-    //                PossibleStitch poss_stitch;
-    //                poss_stitch.dist2 = dist2;
-    //                poss_stitch.terminus_0 = Terminus{ nearby_start.polyline_idx, false };
-    //                poss_stitch.terminus_1 = Terminus{ polyline_1_idx, false };
-    //                stitch_queue.push(poss_stitch);
-    //            }
-    //        }
-    //    }
-    //}
+                Point diff = nearby_start.polyline_term_pt - polyline_1[0];
+                int64_t dist2 = vSize2(diff);
+                if (dist2 < max_dist2)
+                {
+                    PossibleStitch poss_stitch;
+                    poss_stitch.dist2 = dist2;
+                    poss_stitch.terminus_0 = Terminus{ nearby_start.polyline_idx, false };
+                    poss_stitch.terminus_1 = Terminus{ polyline_1_idx, false };
+                    stitch_queue.push(poss_stitch);
+                }
+            }
+        }
+    }
 
     return stitch_queue;
 }
@@ -1071,52 +1073,56 @@ void Slicer::makePolygons(Mesh& mesh, SlicingTolerance slicing_tolerance, std::v
 
     const auto max_hole_area = std::numbers::pi / 4 * static_cast<double>(hole_offset_max_diameter * hole_offset_max_diameter);
 
-    for (int i = 0; i < layers.size(); ++i) {
-        const auto xy_offset_local = (i <= layer_apply_initial_xy_offset) ? xy_offset_0 : xy_offset;
-        if (xy_offset_local != 0)
+    cura::parallel_for<size_t>(
+        0,
+        layers.size(),
+        [&layers, layer_apply_initial_xy_offset, xy_offset, xy_offset_0, xy_offset_hole, hole_offset_max_diameter, max_hole_area](size_t layer_nr)
         {
-            layers[i].polygons = layers[i].polygons.offset(xy_offset_local, ClipperLib::JoinType::jtRound);
-        }
-        if (xy_offset_hole != 0)
-        {
-            const auto parts = layers[i].polygons.splitIntoParts();
-            layers[i].polygons.clear();
-
-            for (const auto& part : parts)
+            const auto xy_offset_local = (layer_nr <= layer_apply_initial_xy_offset) ? xy_offset_0 : xy_offset;
+            if (xy_offset_local != 0)
             {
-                Polygons holes;
-                Polygons outline;
-                for (ConstPolygonRef poly : part)
+                layers[layer_nr].polygons = layers[layer_nr].polygons.offset(xy_offset_local, ClipperLib::JoinType::jtRound);
+            }
+            if (xy_offset_hole != 0)
+            {
+                const auto parts = layers[layer_nr].polygons.splitIntoParts();
+                layers[layer_nr].polygons.clear();
+
+                for (const auto& part : parts)
                 {
-                    const auto area = poly.area();
-                    const auto abs_area = std::abs(area);
-                    const auto is_hole = area < 0;
-                    if (is_hole)
+                    Polygons holes;
+                    Polygons outline;
+                    for (ConstPolygonRef poly : part)
                     {
-                        if (hole_offset_max_diameter == 0)
+                        const auto area = poly.area();
+                        const auto abs_area = std::abs(area);
+                        const auto is_hole = area < 0;
+                        if (is_hole)
                         {
-                            holes.add(poly.offset(xy_offset_hole));
-                        }
-                        else if (abs_area < max_hole_area)
-                        {
-                            const auto distance = static_cast<int>(std::lerp(xy_offset_hole, 0, abs_area / max_hole_area));
-                            holes.add(poly.offset(distance));
+                            if (hole_offset_max_diameter == 0)
+                            {
+                                holes.add(poly.offset(xy_offset_hole));
+                            }
+                            else if (abs_area < max_hole_area)
+                            {
+                                const auto distance = static_cast<int>(std::lerp(xy_offset_hole, 0, abs_area / max_hole_area));
+                                holes.add(poly.offset(distance));
+                            }
+                            else
+                            {
+                                holes.add(poly);
+                            }
                         }
                         else
                         {
-                            holes.add(poly);
+                            outline.add(poly);
                         }
                     }
-                    else
-                    {
-                        outline.add(poly);
-                    }
-                }
 
-                layers[i].polygons.add(outline.difference(holes.unionPolygons()));
+                    layers[layer_nr].polygons.add(outline.difference(holes.unionPolygons()));
+                }
             }
-        }
-    }
+        });
 
     mesh.expandXY(xy_offset);
 }

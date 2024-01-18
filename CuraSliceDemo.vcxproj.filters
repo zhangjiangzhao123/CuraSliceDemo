@@ -36,6 +36,9 @@
     <Filter Include="Header Files\settings\types">
       <UniqueIdentifier>{5c0e19a2-6233-4237-bdb7-b6d11b156a71}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\settings\types">
+      <UniqueIdentifier>{4dedf2d7-e5c5-4728-b8f1-d05b2bafa721}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\utils\AABB.h">
@@ -80,13 +83,7 @@
     <ClInclude Include="include\MeshGroup.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\sliceDataStorage.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\slicer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="clipper.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\utils\Simplify.h">
@@ -115,6 +112,19 @@
     </ClInclude>
     <ClInclude Include="include\settings\types\Velocity.h">
       <Filter>Header Files\settings\types</Filter>
+    </ClInclude>
+    <ClInclude Include="clipper.hpp" />
+    <ClInclude Include="include\utils\SparsePointGridInclusive.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\utils\SparsePointGrid.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\utils\SparseGrid.h">
+      <Filter>Header Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\utils\SparseLineGrid.h">
+      <Filter>Header Files\utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -145,23 +155,11 @@
     <ClCompile Include="src\MeshGroup.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\sliceDataStorage.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\slicer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="clipper.cpp">
-      <Filter>Source Files\utils</Filter>
-    </ClCompile>
     <ClCompile Include="src\utils\ListPolyIt.cpp">
       <Filter>Source Files\utils</Filter>
-    </ClCompile>
-    <ClCompile Include="src\settings\Settings.cpp">
-      <Filter>Source Files\settings</Filter>
     </ClCompile>
     <ClCompile Include="src\utils\Simplify.cpp">
       <Filter>Source Files\utils</Filter>
@@ -170,6 +168,11 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\utils\ThreadPool.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="clipper.cpp" />
+    <ClCompile Include="src\utils\SquareGrid.cpp">
       <Filter>Source Files\utils</Filter>
     </ClCompile>
   </ItemGroup>

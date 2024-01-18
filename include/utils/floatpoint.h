@@ -75,10 +75,10 @@ public:
     static FPoint3 cross(const Point3& a, const Point3& b)
     {
         return FPoint3(a).cross(FPoint3(b));
-//        FPoint3(
-//            a.y*b.z-a.z*b.y,
-//            a.z*b.x-a.x*b.z,
-//            a.x*b.y-a.y*b.x);
+        FPoint3(
+            a.y*b.z-a.z*b.y,
+            a.z*b.x-a.x*b.z,
+            a.x*b.y-a.y*b.x);
     }
 
     Point3 toPoint3()
@@ -88,17 +88,17 @@ public:
 };
 
 
-//inline FPoint3 operator+(FPoint3 lhs, const FPoint3& rhs) {
-//  lhs += rhs;
-//  return lhs;
-//}
+inline FPoint3 operator+(FPoint3 lhs, const FPoint3& rhs) {
+  lhs += rhs;
+  return lhs;
+}
 inline float operator*(FPoint3 lhs, const FPoint3& rhs) {
     return lhs.x*rhs.x + lhs.y*rhs.y + lhs.z*rhs.z;
 }
-//inline FPoint3 operator*(FPoint3 lhs, const float f) {
-//  lhs *= f;
-//  return lhs;
-//}
+inline FPoint3 operator*(FPoint3 lhs, const float f) {
+  lhs *= f;
+  return lhs;
+}
 
 
 
