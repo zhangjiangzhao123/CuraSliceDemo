@@ -6,9 +6,9 @@
 #include <numeric>
 #include <unordered_set>
 
-//#include <../../include/range/v3/view/zip.hpp>
-//#include <../../include/range/v3/range/primitives.hpp>
-//#include <../../include/range/v3/view/filter.hpp>
+#include <range/v3/view/zip.hpp>
+#include <range/v3/range/primitives.hpp>
+#include <range/v3/view/filter.hpp>
 
 #include "../../include/utils/linearAlg2D.h" // pointLiesOnTheRightOfLine
 
@@ -375,36 +375,36 @@ Polygons Polygons::offset(const std::vector<coord_t>& offset_dists) const
 
     Polygons ret;
     int i = 0;
-    //for (auto& poly_line : this->paths | ranges::views::filter([](const auto& path){ return ! path.empty(); }))
-    //{
-    //    std::vector<ClipperLib::IntPoint> ret_poly_line;
+    for (auto& poly_line : this->paths | ranges::views::filter([](const auto& path){ return ! path.empty(); }))
+    {
+        std::vector<ClipperLib::IntPoint> ret_poly_line;
 
-    //    auto prev_p = poly_line.back();
-    //    auto prev_dist = offset_dists[i + poly_line.size() - 1];
+        auto prev_p = poly_line.back();
+        auto prev_dist = offset_dists[i + poly_line.size() - 1];
 
-    //    for (const auto& p: poly_line)
-    //    {
-    //        auto offset_dist = offset_dists[i];
+        for (const auto& p: poly_line)
+        {
+            auto offset_dist = offset_dists[i];
 
-    //        auto vec_dir = prev_p - p;
+            auto vec_dir = prev_p - p;
 
-    //        constexpr coord_t min_vec_len = 10;
-    //        if (vSize2(vec_dir) > min_vec_len * min_vec_len)
-    //        {
-    //            auto offset_p1 = turn90CCW(normal(vec_dir, prev_dist));
-    //            auto offset_p2 = turn90CCW(normal(vec_dir, offset_dist));
+            constexpr coord_t min_vec_len = 10;
+            if (vSize2(vec_dir) > min_vec_len * min_vec_len)
+            {
+                auto offset_p1 = turn90CCW(normal(vec_dir, prev_dist));
+                auto offset_p2 = turn90CCW(normal(vec_dir, offset_dist));
 
-    //            ret_poly_line.emplace_back(prev_p + offset_p1);
-    //            ret_poly_line.emplace_back(p + offset_p2);
-    //        }
+                ret_poly_line.emplace_back(prev_p + offset_p1);
+                ret_poly_line.emplace_back(p + offset_p2);
+            }
 
-    //        prev_p = p;
-    //        prev_dist = offset_dist;
-    //        i ++;
-    //    }
+            prev_p = p;
+            prev_dist = offset_dist;
+            i ++;
+        }
 
-    //    ret.add(ret_poly_line);
-    //}
+        ret.add(ret_poly_line);
+    }
 
     ClipperLib::SimplifyPolygons(ret.paths, ClipperLib::PolyFillType::pftPositive);
 
@@ -648,48 +648,48 @@ void Polygons::removeSmallAreas(const double min_area_size, const bool remove_ho
     paths.resize(new_end - paths.begin());
 }
 
-//void Polygons::removeSmallCircumference(const coord_t min_circumference_size, const bool remove_holes)
-//{
-//    removeSmallAreaCircumference(0.0, min_circumference_size, remove_holes);
-//}
-//
-//void Polygons::removeSmallAreaCircumference(const double min_area_size, const coord_t min_circumference_size, const bool remove_holes)
-//{
-//    Polygons new_polygon;
-//
-//    bool outline_is_removed = false;
-//    for (ConstPolygonRef poly : paths)
-//    {
-//        double area = poly.area();
-//        auto circumference = poly.polygonLength();
-//        bool is_outline = area >= 0;
-//
-//        if (is_outline)
-//        {
-//            if (circumference >= min_circumference_size && std::abs(area) >= min_area_size)
-//            {
-//                new_polygon.add(poly);
-//                outline_is_removed = false;
-//            }
-//            else
-//            {
-//                outline_is_removed = true;
-//            }
-//        }
-//        else if (outline_is_removed)
-//        {
-//            // containing parent outline is removed; hole should be removed as well
-//        }
-//        else if (!remove_holes || (circumference >= min_circumference_size && std::abs(area) >= min_area_size))
-//        {
-//            // keep hole-polygon if we do not remove holes, or if its
-//            // circumference is bigger then the minimum circumference size
-//            new_polygon.add(poly);
-//        }
-//    }
-//
-//    *this = new_polygon;
-//}
+void Polygons::removeSmallCircumference(const coord_t min_circumference_size, const bool remove_holes)
+{
+    removeSmallAreaCircumference(0.0, min_circumference_size, remove_holes);
+}
+
+void Polygons::removeSmallAreaCircumference(const double min_area_size, const coord_t min_circumference_size, const bool remove_holes)
+{
+    Polygons new_polygon;
+
+    bool outline_is_removed = false;
+    for (ConstPolygonRef poly : paths)
+    {
+        double area = poly.area();
+        auto circumference = poly.polygonLength();
+        bool is_outline = area >= 0;
+
+        if (is_outline)
+        {
+            if (circumference >= min_circumference_size && std::abs(area) >= min_area_size)
+            {
+                new_polygon.add(poly);
+                outline_is_removed = false;
+            }
+            else
+            {
+                outline_is_removed = true;
+            }
+        }
+        else if (outline_is_removed)
+        {
+            // containing parent outline is removed; hole should be removed as well
+        }
+        else if (!remove_holes || (circumference >= min_circumference_size && std::abs(area) >= min_area_size))
+        {
+            // keep hole-polygon if we do not remove holes, or if its
+            // circumference is bigger then the minimum circumference size
+            new_polygon.add(poly);
+        }
+    }
+
+    *this = new_polygon;
+}
 
 void Polygons::removeDegenerateVerts()
 {

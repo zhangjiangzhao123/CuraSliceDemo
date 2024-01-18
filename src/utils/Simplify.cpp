@@ -111,11 +111,11 @@ const Point& Simplify::getPosition(const Point& vertex) const
 //    return vertex.p;
 //}
 
-//Point Simplify::createIntersection(const Point& before, const Point intersection, const Point& after) const
-//{
-//    return intersection;
-//}
-//
+Point Simplify::createIntersection(const Point& before, const Point intersection, const Point& after) const
+{
+    return intersection;
+}
+
 //ExtrusionJunction Simplify::createIntersection(const ExtrusionJunction& before, const Point intersection, const ExtrusionJunction& after) const
 //{
 //    //Average the extrusion width of the line.

@@ -112,7 +112,7 @@ int main()
 
 	MeshGroup* meshGroup = new MeshGroup();
 	FMatrix4x3 matriix;
-	//Settings setting;
+
 	loadMeshIntoMeshGroup(meshGroup, fileName, matriix);
 	auto readEnd = system_clock::now();
 	auto readTime = duration_cast<microseconds>(readEnd - start);
@@ -121,7 +121,7 @@ int main()
 	
 	Mesh* mesh = &meshGroup->meshes.front();
 	AABB3D bbox = mesh->getAABB();
-	float thickness = 60;
+	float thickness = 150;
 	int sliceLayerCount = bbox.max.z / thickness;
 	std::cout << "Slice Thickness :" << thickness / 1000 << " mm\n";
 	fprintf(fp, "Slice Thickness:%f mm\n", thickness / 1000);

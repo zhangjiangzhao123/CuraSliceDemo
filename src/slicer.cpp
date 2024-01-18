@@ -16,7 +16,7 @@
 //#include "../../include/settings/AdaptiveLayerHeights.h"
 #include "../include/settings/EnumSettings.h"
 //#include "../../include/settings/types/LayerIndex.h"
-//#include "../../include/utils/Simplify.h"
+#include "../../include/utils/Simplify.h"
 //#include "../../include/utils/SparsePointGridInclusive.h"
 #include "../../include/utils/ThreadPool.h"
 //#include "../../include/utils/gettime.h"
@@ -776,18 +776,23 @@ void SlicerLayer::makePolygons(const Mesh* mesh)
     }
 
     // Remove all the tiny polygons, or polygons that are not closed. As they do not contribute to the actual print.
-    //const coord_t snap_distance = std::max(mesh->settings.get<coord_t>("minimum_polygon_circumference"), static_cast<coord_t>(1));
-    //auto it = std::remove_if(
-    //    polygons.begin(),
-    //    polygons.end(),
-    //    [snap_distance](PolygonRef poly)
-    //    {
-    //        return poly.shorterThan(snap_distance);
-    //    });
-    //polygons.erase(it, polygons.end());
+    const coord_t snap_distance = 1;/*std::max(mesh->settings.get<coord_t>("minimum_polygon_circumference"), static_cast<coord_t>(1));*/
+    auto it = std::remove_if(
+        polygons.begin(),
+        polygons.end(),
+        [snap_distance](PolygonRef poly)
+        {
+            return poly.shorterThan(snap_distance);
+        });
+    polygons.erase(it, polygons.end());
 
     // Finally optimize all the polygons. Every point removed saves time in the long run.
-    //    polygons = Simplify(mesh->settings).polygon(polygons);
+        //polygons = Simplify(mesh->settings).polygon(polygons);
+    coord_t max_resolution = 500;
+    coord_t max_deviation = 25;
+    coord_t max_area_deviation = 50000000;
+    polygons = Simplify(max_resolution, max_deviation, max_area_deviation).polygon(polygons);
+
     //polygons = slots::instance().modify<plugins::v0::SlotID::SIMPLIFY_MODIFY>(
     //    polygons,
     //    mesh->settings.get<coord_t>("meshfix_maximum_resolution"),
@@ -796,14 +801,14 @@ void SlicerLayer::makePolygons(const Mesh* mesh)
     polygons.removeDegenerateVerts(); // remove verts connected to overlapping line segments
 
     // Clean up polylines for Surface Mode printing
-    //it = std::remove_if(
-    //    openPolylines.begin(),
-    //    openPolylines.end(),
-    //    [snap_distance](PolygonRef poly)
-    //    {
-    //        return poly.shorterThan(snap_distance);
-    //    });
-    //openPolylines.erase(it, openPolylines.end());
+    it = std::remove_if(
+        openPolylines.begin(),
+        openPolylines.end(),
+        [snap_distance](PolygonRef poly)
+        {
+            return poly.shorterThan(snap_distance);
+        });
+    openPolylines.erase(it, openPolylines.end());
 
     openPolylines.removeDegenerateVertsPolyline();
 }
@@ -814,7 +819,7 @@ Slicer::Slicer(Mesh* i_mesh, const coord_t thickness, const size_t slice_layer_c
     //const SlicingTolerance slicing_tolerance = mesh->settings.get<SlicingTolerance>("slicing_tolerance");
     //const coord_t initial_layer_thickness = Application::getInstance().current_slice->scene.current_mesh_group->settings.get<coord_t>("layer_height_0");
     const SlicingTolerance slicing_tolerance = SlicingTolerance::MIDDLE;
-    const coord_t initial_layer_thickness = 0;
+    const coord_t initial_layer_thickness = thickness / 2;
 
     assert(slice_layer_count > 0);
 
@@ -1018,9 +1023,12 @@ std::vector<SlicerLayer> Slicer::buildLayersWithHeight(
 
 void Slicer::makePolygons(Mesh& mesh, SlicingTolerance slicing_tolerance, std::vector<SlicerLayer>& layers)
 {
-    for (int i = 0; i < layers.size(); ++i) {
-        layers[i].makePolygons(&mesh);
-    }
+    cura::parallel_for(
+        layers,
+        [&mesh](auto layer_it)
+        {
+            layer_it->makePolygons(&mesh);
+        });
 
     switch (slicing_tolerance)
     {

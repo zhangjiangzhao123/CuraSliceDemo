@@ -54,7 +54,7 @@ Application::~Application()
 Application& Application::getInstance()
 {
     static Application instance; // Constructs using the default constructor.
-    instance.startThreadPool(4);
+    instance.startThreadPool();
     return instance;
 }
 
