@@ -752,21 +752,21 @@ void SlicerLayer::makePolygons(const Mesh* mesh)
     //if (mesh->settings.get<ESurfaceMode>("magic_mesh_surface_mode") == ESurfaceMode::NORMAL)
     //{ // don't stitch when using (any) mesh surface mode, i.e. also don't stitch when using mixed mesh surface and closed polygons, because then polylines which are supposed to be
     //  // open will be closed
-    //    stitch(open_polylines);
+        stitch(open_polylines);
     //}
 
     //if (mesh->settings.get<bool>("meshfix_extensive_stitching"))
     //{
-    //    stitch_extensive(open_polylines);
+        stitch_extensive(open_polylines);
     //}
 
     //if (mesh->settings.get<bool>("meshfix_keep_open_polygons"))
     //{
-    //    for (PolygonRef polyline : open_polylines)
-    //    {
-    //        if (polyline.size() > 0)
-    //            polygons.add(polyline);
-    //    }
+        for (PolygonRef polyline : open_polylines)
+        {
+            if (polyline.size() > 0)
+                polygons.add(polyline);
+        }
     //}
 
     for (PolygonRef polyline : open_polylines)
